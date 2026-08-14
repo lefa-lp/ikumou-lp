@@ -1,0 +1,1004 @@
+/* =========================================================
+   育毛鍼灸LP スタイルシート
+   モバイルファースト（375px〜430px基準）
+   ========================================================= */
+
+/* ---------- CSS Variables ---------- */
+:root {
+  --color-bg: #FFFDF7;
+  --color-main: #547A3E;
+  --color-sub: #C9A55C;
+  --color-text: #29261F;
+  --color-bg-sub: #F5F3E9;
+  --color-cta: #E87835;
+
+  --color-main-dark: #435f31;
+  --color-cta-dark: #cf6423;
+  --color-border: #e6e1d1;
+
+  --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+  --font-display: "Noto Serif JP", "Hiragino Mincho ProN", serif;
+
+  --content-width: 680px;
+  --section-space: 72px;
+  --radius: 16px;
+
+  --tap-min: 44px;
+}
+
+/* ---------- Reset ---------- */
+* ,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.8;
+  overflow-x: hidden;
+  padding-bottom: 96px; /* 固定CTA分の余白 */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  margin: 0;
+  line-height: 1.5;
+}
+
+p {
+  margin: 0 0 1em;
+}
+
+button {
+  font-family: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* 過剰でない自然なfocusスタイル */
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-main);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- レイアウト共通 ---------- */
+.lp-wrapper {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+body {
+  /* PC表示時、LP外側に薄い背景色 */
+  background-color: var(--color-bg-sub);
+}
+
+.section {
+  background: var(--color-bg);
+  padding: var(--section-space) 0;
+}
+
+.section-sub {
+  background: var(--color-bg-sub);
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 32px;
+  letter-spacing: 0.02em;
+}
+
+.section-title-lg {
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 28px;
+  letter-spacing: 0.02em;
+}
+
+.body-text {
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.disclaimer {
+  font-size: 13px;
+  color: #6b6455;
+  text-align: center;
+  margin: 16px 0 28px;
+}
+
+/* スクロールフェードイン（IntersectionObserverでis-visible付与） */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.fade-in.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- CTAボタン共通 ---------- */
+.cta-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 14px 24px;
+  background: var(--color-cta);
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  border-radius: 999px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(232, 120, 53, 0.28);
+  transition: background 0.2s ease, transform 0.15s ease;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.cta-button:hover {
+  background: var(--color-cta-dark);
+}
+
+.cta-button:active {
+  transform: scale(0.98);
+}
+
+.cta-button-lg {
+  font-size: 18px;
+  min-height: 60px;
+}
+
+/* ---------- SECTION 01: HERO ---------- */
+.hero {
+  padding-top: 32px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  font-size: 13px;
+  color: var(--color-main-dark);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 10px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  background: var(--color-bg-sub);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: 13px;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+}
+
+.hero-badge-number {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-main);
+}
+
+.hero-photo {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.hero-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.hero-sub {
+  font-size: 14px;
+  color: var(--color-sub);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.hero-title {
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--color-main-dark);
+  letter-spacing: 0.06em;
+  margin-bottom: 22px;
+}
+
+.hero-beforeafter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.ba-item {
+  position: relative;
+  width: 42%;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ba-item img {
+  aspect-ratio: 5 / 6;
+  object-fit: cover;
+}
+
+.ba-label {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: rgba(41, 38, 31, 0.72);
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.ba-arrow {
+  color: var(--color-sub);
+  font-size: 20px;
+}
+
+.hero-copy {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.8;
+  margin-bottom: 26px;
+}
+
+/* ---------- SECTION 02: 悩みへの共感 ---------- */
+.worry-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.worry-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  font-size: 15px;
+}
+
+.worry-check {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-main);
+  color: #fff;
+  font-size: 14px;
+}
+
+.worry-summary {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.9;
+  background: var(--color-bg-sub);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+/* ---------- SECTION 03: Before / After 症例 ---------- */
+.case-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 8px;
+}
+
+.case-card {
+  background: var(--color-bg-sub);
+  border-radius: var(--radius);
+  padding: 18px;
+}
+
+.case-images {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.case-image {
+  position: relative;
+  flex: 1;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.case-image img {
+  aspect-ratio: 5 / 6;
+  object-fit: cover;
+}
+
+.case-image-label {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(41, 38, 31, 0.72);
+  color: #fff;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.case-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin: 0;
+}
+
+.case-meta > div {
+  text-align: center;
+  flex: 1;
+}
+
+.case-meta dt {
+  font-size: 11px;
+  color: #6b6455;
+  margin-bottom: 4px;
+}
+
+.case-meta dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* ---------- SECTION 04: 原因説明 図解 ---------- */
+.diagram {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1 / 1;
+  margin: 40px auto 8px;
+}
+
+.diagram-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 34%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: var(--color-main);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 6px;
+  z-index: 2;
+  box-shadow: 0 8px 20px rgba(84, 122, 62, 0.28);
+}
+
+.diagram-node {
+  position: absolute;
+  width: 30%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: var(--color-bg);
+  border: 2px solid var(--color-sub);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 4px;
+}
+
+.diagram-node-1 { top: 0%;    left: 50%; transform: translate(-50%, 0); }
+.diagram-node-2 { top: 20%;   left: 95%; transform: translate(-100%, 0); }
+.diagram-node-3 { top: 68%;   left: 100%; transform: translate(-100%, 0); }
+.diagram-node-4 { top: 92%;   left: 50%; transform: translate(-50%, -100%); }
+.diagram-node-5 { top: 68%;   left: 0%; transform: translate(0, 0); }
+.diagram-node-6 { top: 20%;   left: 5%; transform: translate(0, 0); }
+
+/* ---------- SECTION 05: 比較 ---------- */
+.compare-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.compare-card {
+  background: var(--color-bg-sub);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.compare-card h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--color-main-dark);
+}
+
+.compare-card p {
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: var(--color-text);
+}
+
+.compare-card-highlight {
+  background: #fff;
+  border: 2px solid var(--color-main);
+  box-shadow: 0 8px 20px rgba(84, 122, 62, 0.14);
+}
+
+.compare-note {
+  text-align: center;
+}
+
+/* ---------- SECTION 06: 当院の育毛鍼灸 ---------- */
+.approach-photo {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+/* ---------- SECTION 07: 選ばれる理由 ---------- */
+.reason-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.reason-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+
+.reason-number {
+  font-family: var(--font-display);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--color-sub);
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.reason-item h3 {
+  font-size: 16px;
+  margin-bottom: 6px;
+}
+
+.reason-item p {
+  font-size: 14px;
+  margin: 0;
+  color: #4a4535;
+}
+
+/* ---------- SECTION 08: お客様の声 ---------- */
+.voice-slider-outer {
+  overflow: hidden;
+  padding: 4px 0 12px;
+}
+
+.voice-slider {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding: 0 20px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.voice-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.voice-card {
+  scroll-snap-align: center;
+  flex: 0 0 82%;
+  max-width: 340px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 22px;
+}
+
+.voice-headline {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--color-main-dark);
+}
+
+.voice-body {
+  font-size: 13.5px;
+  color: #4a4535;
+  margin-bottom: 12px;
+}
+
+.voice-attr {
+  font-size: 12px;
+  color: #6b6455;
+  margin: 0;
+  text-align: right;
+}
+
+/* ---------- SECTION 09: 施術の流れ ---------- */
+.flow-timeline {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-left: 22px;
+  border-left: 2px dashed var(--color-sub);
+}
+
+.flow-step {
+  position: relative;
+}
+
+.flow-step::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: -28px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-main);
+}
+
+.flow-step-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.flow-step-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-sub);
+  letter-spacing: 0.05em;
+}
+
+.flow-step-header h3 {
+  font-size: 17px;
+}
+
+.flow-step img {
+  border-radius: 12px;
+}
+
+/* ---------- SECTION 10: 施術者紹介 ---------- */
+#practitioner .lp-wrapper {
+  text-align: center;
+}
+
+.practitioner-photo {
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.practitioner-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.practitioner-qual {
+  font-size: 13px;
+  color: var(--color-sub);
+  margin-bottom: 20px;
+}
+
+.practitioner-message {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.7;
+  color: var(--color-main-dark);
+  margin-bottom: 22px;
+}
+
+#practitioner .body-text {
+  text-align: left;
+}
+
+/* ---------- SECTION 11: 初回案内 ---------- */
+.price-box {
+  background: var(--color-bg-sub);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  font-size: 15px;
+}
+
+.price-row-normal {
+  border-bottom: 1px dashed var(--color-border);
+  color: #6b6455;
+}
+
+.price-row-normal .price-value {
+  text-decoration: line-through;
+}
+
+.price-row-first {
+  font-weight: 700;
+  font-size: 17px;
+}
+
+.price-value-first {
+  color: var(--color-cta);
+  font-size: 24px;
+  font-family: var(--font-display);
+}
+
+.price-includes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.price-includes li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14.5px;
+}
+
+.price-includes li span {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-main);
+  color: #fff;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ---------- SECTION 12 / 15: CTAセクション ---------- */
+.section-cta {
+  background: var(--color-main);
+  color: #fff;
+  text-align: center;
+}
+
+.cta-mid-copy {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.cta-mid-sub {
+  font-size: 15px;
+  line-height: 1.9;
+  margin-bottom: 26px;
+  opacity: 0.92;
+}
+
+.section-cta .cta-button {
+  background: #fff;
+  color: var(--color-main-dark);
+}
+
+.section-cta .cta-button:hover {
+  background: var(--color-bg-sub);
+}
+
+/* ---------- SECTION 13: FAQ ---------- */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.faq-item {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.faq-item h3 {
+  font-family: var(--font-body);
+  font-size: 15px;
+}
+
+.faq-question {
+  width: 100%;
+  min-height: var(--tap-min);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  text-align: left;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.faq-icon {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.faq-icon::before,
+.faq-icon::after {
+  content: "";
+  position: absolute;
+  background: var(--color-main);
+  border-radius: 2px;
+  transition: transform 0.25s ease;
+}
+
+.faq-icon::before {
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  transform: translateY(-50%);
+}
+
+.faq-icon::after {
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.faq-question[aria-expanded="true"] .faq-icon::after {
+  transform: translateX(-50%) rotate(90deg);
+  opacity: 0;
+}
+
+.faq-answer {
+  padding: 0 18px 16px;
+  font-size: 14px;
+  color: #4a4535;
+  animation: faq-open 0.25s ease;
+}
+
+@keyframes faq-open {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- SECTION 16: 店舗情報 ---------- */
+.shop-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.shop-photos img {
+  border-radius: 12px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.shop-info {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.shop-info > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px dashed var(--color-border);
+  padding-bottom: 10px;
+  font-size: 14px;
+}
+
+.shop-info dt {
+  color: #6b6455;
+  flex-shrink: 0;
+}
+
+.shop-info dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 500;
+}
+
+.shop-map {
+  margin-bottom: 24px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.shop-map iframe {
+  display: block;
+}
+
+.shop-map-placeholder {
+  background: var(--color-bg-sub);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+  padding: 40px 16px;
+  text-align: center;
+  font-size: 13px;
+  color: #6b6455;
+}
+
+/* ---------- 固定CTA ---------- */
+.fixed-cta {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(255, 253, 247, 0.96);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -6px 16px rgba(41, 38, 31, 0.08);
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+}
+
+.fixed-cta.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.cta-button-fixed {
+  max-width: 480px;
+}
+
+/* =========================================================
+   タブレット / PC（768px〜）
+   ========================================================= */
+@media (min-width: 768px) {
+  :root {
+    --section-space: 96px;
+  }
+
+  .section-title {
+    font-size: 26px;
+  }
+
+  .section-title-lg {
+    font-size: 30px;
+  }
+
+  .hero-title {
+    font-size: 56px;
+  }
+
+  .worry-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .case-list {
+    flex-direction: row;
+  }
+
+  .case-card {
+    flex: 1;
+  }
+
+  .compare-list {
+    flex-direction: row;
+  }
+
+  .compare-card {
+    flex: 1;
+  }
+
+  .reason-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .shop-photos {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/* =========================================================
+   PC（1024px〜）: LPの外側に薄い背景、中央にLP幅で表示
+   ========================================================= */
+@media (min-width: 1024px) {
+  body {
+    padding-top: 24px;
+  }
+
+  .fixed-cta {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    border-radius: var(--radius) var(--radius) 0 0;
+  }
+}
