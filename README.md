@@ -2,14 +2,18 @@
 
 目黒駅の育毛鍼灸をテーマにしたランディングページ。Flask + 素のHTML/CSS/JavaScript（外部JSライブラリなし）で構成した1ページ構成のLPです。
 
+**公開URL: https://lefa-lp.github.io/ikumou-lp/**（GitHub Pages / `main` ブランチのルート）
+
 ## 構成
 
 ```
 ikumou-lp/
 ├── app.py              # Flaskアプリ（"/" で index.html をレンダリング）
+├── build.py            # GitHub Pages公開用に index.html を書き出す
+├── index.html          # ← build.py の自動生成物。直接編集しない
 ├── requirements.txt
 ├── templates/
-│   └── index.html      # LP本体（全セクション）
+│   └── index.html      # LP本体（全セクション）。編集はこちら
 └── static/
     ├── css/style.css   # LPのスタイル一式
     ├── js/main.js      # スクロール連動・FAQ開閉・CTA計測フック等
@@ -34,6 +38,19 @@ LINE URLは環境変数でも差し替えられます。
 LINE_URL="https://lin.ee/xxxxxxx" python app.py
 ```
 
+macOSで `Address already in use` になる場合、5000番はAirPlay Receiverが使っています。`flask --app app run --port 5001 --debug` で回避してください。
+
+## GitHub Pagesへの公開
+
+`templates/index.html` や `static/` を編集したら、ビルドしてからpushします。
+
+```bash
+python build.py   # index.html を再生成
+git add -A && git commit -m "..." && git push
+```
+
+`build.py` はFlaskテンプレートをレンダリングし、サブパス配信（`/ikumou-lp/`）に合わせて静的ファイルの参照を相対パスに変換します。`index.html` を直接編集しても次回ビルドで上書きされます。
+
 ## TODO（未確定情報 / 現在ダミー値）
 
 **このLPは未確定情報がすべてダミー値のままです。公開前に以下を差し替えてください。**
@@ -50,6 +67,8 @@ LINE_URL="https://lin.ee/xxxxxxx" python app.py
 | favicon | `static/images/favicon.png` を参照しているがファイル未配置（404） | `static/images/` に追加 |
 
 確定済みの情報: 院名（鍼灸整体院 Re-Ane）/ 最寄駅（目黒駅）/ 営業時間（10:00〜19:00、最終受付18:00）/ 定休日（不定休）
+
+canonical / og:url が `example.com` のままなので、LINEやSNSでURLを共有したときのプレビュー（タイトル・サムネイル）は正しく表示されません。公開URLを確定させる際に併せて修正してください。
 
 ### 画像について
 
