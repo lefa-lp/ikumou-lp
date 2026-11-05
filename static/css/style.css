@@ -1,1004 +1,268 @@
 /* =========================================================
-   育毛鍼灸LP スタイルシート
-   モバイルファースト（375px〜430px基準）
+   THE 鍼灸 育毛鍼灸LP
+   ベージュ地 × グリーン × コーラルの差し色。セクションごとに背景色を変えて単調さを回避。
    ========================================================= */
-
-/* ---------- CSS Variables ---------- */
-:root {
-  --color-bg: #FFFDF7;
-  --color-main: #547A3E;
-  --color-sub: #C9A55C;
-  --color-text: #29261F;
-  --color-bg-sub: #F5F3E9;
-  --color-cta: #E87835;
-
-  --color-main-dark: #435f31;
-  --color-cta-dark: #cf6423;
-  --color-border: #e6e1d1;
-
-  --font-body: "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
-  --font-display: "Noto Serif JP", "Hiragino Mincho ProN", serif;
-
-  --content-width: 680px;
-  --section-space: 72px;
-  --radius: 16px;
-
-  --tap-min: 44px;
-}
-
-/* ---------- Reset ---------- */
-* ,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  background: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-body);
-  font-size: 16px;
-  line-height: 1.8;
-  overflow-x: hidden;
-  padding-bottom: 96px; /* 固定CTA分の余白 */
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ul, ol {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-h1, h2, h3 {
-  font-family: var(--font-display);
-  margin: 0;
-  line-height: 1.5;
-}
-
-p {
-  margin: 0 0 1em;
-}
-
-button {
-  font-family: inherit;
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: inherit;
-}
-
-/* 過剰でない自然なfocusスタイル */
-a:focus-visible,
-button:focus-visible {
-  outline: 3px solid var(--color-main);
-  outline-offset: 2px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* ---------- レイアウト共通 ---------- */
-.lp-wrapper {
-  width: 100%;
-  max-width: var(--content-width);
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-body {
-  /* PC表示時、LP外側に薄い背景色 */
-  background-color: var(--color-bg-sub);
-}
-
-.section {
-  background: var(--color-bg);
-  padding: var(--section-space) 0;
-}
-
-.section-sub {
-  background: var(--color-bg-sub);
-}
-
-.section-title {
-  font-size: 22px;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 32px;
-  letter-spacing: 0.02em;
-}
-
-.section-title-lg {
-  font-size: 26px;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 28px;
-  letter-spacing: 0.02em;
-}
-
-.body-text {
-  font-size: 16px;
-  line-height: 1.9;
-}
-
-.disclaimer {
-  font-size: 13px;
-  color: #6b6455;
-  text-align: center;
-  margin: 16px 0 28px;
-}
-
-/* スクロールフェードイン（IntersectionObserverでis-visible付与） */
-.fade-in {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.fade-in.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ---------- CTAボタン共通 ---------- */
-.cta-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 56px;
-  padding: 14px 24px;
-  background: var(--color-cta);
-  color: #fff;
-  font-weight: 700;
-  font-size: 16px;
-  border-radius: 999px;
-  text-align: center;
-  box-shadow: 0 6px 16px rgba(232, 120, 53, 0.28);
-  transition: background 0.2s ease, transform 0.15s ease;
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
-}
-
-.cta-button:hover {
-  background: var(--color-cta-dark);
-}
-
-.cta-button:active {
-  transform: scale(0.98);
-}
-
-.cta-button-lg {
-  font-size: 18px;
-  min-height: 60px;
-}
-
-/* ---------- SECTION 01: HERO ---------- */
-.hero {
-  padding-top: 32px;
-  padding-bottom: 40px;
-  text-align: center;
-}
-
-.hero-eyebrow {
-  font-size: 13px;
-  color: var(--color-main-dark);
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  margin-bottom: 10px;
-}
-
-.hero-badge {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 4px;
-  background: var(--color-bg-sub);
-  border: 1px solid var(--color-border);
-  color: var(--color-text);
-  font-size: 13px;
-  padding: 6px 16px;
-  border-radius: 999px;
-  margin-bottom: 20px;
-}
-
-.hero-badge-number {
-  font-family: var(--font-display);
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--color-main);
-}
-
-.hero-photo {
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 18px;
-}
-
-.hero-photo img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-}
-
-.hero-sub {
-  font-size: 14px;
-  color: var(--color-sub);
-  font-weight: 500;
-  margin-bottom: 6px;
-}
-
-.hero-title {
-  font-size: 44px;
-  font-weight: 700;
-  color: var(--color-main-dark);
-  letter-spacing: 0.06em;
-  margin-bottom: 22px;
-}
-
-.hero-beforeafter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 22px;
-}
-
-.ba-item {
-  position: relative;
-  width: 42%;
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.ba-item img {
-  aspect-ratio: 5 / 6;
-  object-fit: cover;
-}
-
-.ba-label {
-  position: absolute;
-  bottom: 6px;
-  left: 6px;
-  background: rgba(41, 38, 31, 0.72);
-  color: #fff;
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 999px;
-}
-
-.ba-arrow {
-  color: var(--color-sub);
-  font-size: 20px;
-}
-
-.hero-copy {
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 1.8;
-  margin-bottom: 26px;
-}
-
-/* ---------- SECTION 02: 悩みへの共感 ---------- */
-.worry-list {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  margin-bottom: 28px;
-}
-
-.worry-card {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 16px 18px;
-  font-size: 15px;
-}
-
-.worry-check {
-  flex-shrink: 0;
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: var(--color-main);
-  color: #fff;
-  font-size: 14px;
-}
-
-.worry-summary {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.9;
-  background: var(--color-bg-sub);
-  border-radius: var(--radius);
-  padding: 20px;
-}
-
-/* ---------- SECTION 03: Before / After 症例 ---------- */
-.case-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin-bottom: 8px;
-}
-
-.case-card {
-  background: var(--color-bg-sub);
-  border-radius: var(--radius);
-  padding: 18px;
-}
-
-.case-images {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.case-image {
-  position: relative;
-  flex: 1;
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.case-image img {
-  aspect-ratio: 5 / 6;
-  object-fit: cover;
-}
-
-.case-image-label {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background: rgba(41, 38, 31, 0.72);
-  color: #fff;
-  font-size: 11px;
-  padding: 2px 8px;
-  border-radius: 999px;
-}
-
-.case-meta {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  margin: 0;
-}
-
-.case-meta > div {
-  text-align: center;
-  flex: 1;
-}
-
-.case-meta dt {
-  font-size: 11px;
-  color: #6b6455;
-  margin-bottom: 4px;
-}
-
-.case-meta dd {
-  margin: 0;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-/* ---------- SECTION 04: 原因説明 図解 ---------- */
-.diagram {
-  position: relative;
-  width: 100%;
-  max-width: 340px;
-  aspect-ratio: 1 / 1;
-  margin: 40px auto 8px;
-}
-
-.diagram-center {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 34%;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  background: var(--color-main);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 700;
-  padding: 6px;
-  z-index: 2;
-  box-shadow: 0 8px 20px rgba(84, 122, 62, 0.28);
-}
-
-.diagram-node {
-  position: absolute;
-  width: 30%;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  background: var(--color-bg);
-  border: 2px solid var(--color-sub);
-  color: var(--color-text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-size: 12.5px;
-  font-weight: 500;
-  padding: 4px;
-}
-
-.diagram-node-1 { top: 0%;    left: 50%; transform: translate(-50%, 0); }
-.diagram-node-2 { top: 20%;   left: 95%; transform: translate(-100%, 0); }
-.diagram-node-3 { top: 68%;   left: 100%; transform: translate(-100%, 0); }
-.diagram-node-4 { top: 92%;   left: 50%; transform: translate(-50%, -100%); }
-.diagram-node-5 { top: 68%;   left: 0%; transform: translate(0, 0); }
-.diagram-node-6 { top: 20%;   left: 5%; transform: translate(0, 0); }
-
-/* ---------- SECTION 05: 比較 ---------- */
-.compare-list {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 24px;
-}
-
-.compare-card {
-  background: var(--color-bg-sub);
-  border-radius: var(--radius);
-  padding: 20px;
-  text-align: center;
-}
-
-.compare-card h3 {
-  font-size: 18px;
-  margin-bottom: 10px;
-  color: var(--color-main-dark);
-}
-
-.compare-card p {
-  font-size: 14px;
-  margin-bottom: 4px;
-  color: var(--color-text);
-}
-
-.compare-card-highlight {
-  background: #fff;
-  border: 2px solid var(--color-main);
-  box-shadow: 0 8px 20px rgba(84, 122, 62, 0.14);
-}
-
-.compare-note {
-  text-align: center;
-}
-
-/* ---------- SECTION 06: 当院の育毛鍼灸 ---------- */
-.approach-photo {
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 24px;
-}
-
-/* ---------- SECTION 07: 選ばれる理由 ---------- */
-.reason-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin-bottom: 32px;
-}
-
-.reason-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 18px;
-}
-
-.reason-number {
-  font-family: var(--font-display);
-  font-size: 34px;
-  font-weight: 700;
-  color: var(--color-sub);
-  line-height: 1;
-  flex-shrink: 0;
-}
-
-.reason-item h3 {
-  font-size: 16px;
-  margin-bottom: 6px;
-}
-
-.reason-item p {
-  font-size: 14px;
-  margin: 0;
-  color: #4a4535;
-}
-
-/* ---------- SECTION 08: お客様の声 ---------- */
-.voice-slider-outer {
-  overflow: hidden;
-  padding: 4px 0 12px;
-}
-
-.voice-slider {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding: 0 20px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-.voice-slider::-webkit-scrollbar {
-  display: none;
-}
-
-.voice-card {
-  scroll-snap-align: center;
-  flex: 0 0 82%;
-  max-width: 340px;
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 22px;
-}
-
-.voice-headline {
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  color: var(--color-main-dark);
-}
-
-.voice-body {
-  font-size: 13.5px;
-  color: #4a4535;
-  margin-bottom: 12px;
-}
-
-.voice-attr {
-  font-size: 12px;
-  color: #6b6455;
-  margin: 0;
-  text-align: right;
-}
-
-/* ---------- SECTION 09: 施術の流れ ---------- */
-.flow-timeline {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-  padding-left: 22px;
-  border-left: 2px dashed var(--color-sub);
-}
-
-.flow-step {
-  position: relative;
-}
-
-.flow-step::before {
-  content: "";
-  position: absolute;
-  top: 4px;
-  left: -28px;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--color-main);
-}
-
-.flow-step-header {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-
-.flow-step-label {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--color-sub);
-  letter-spacing: 0.05em;
-}
-
-.flow-step-header h3 {
-  font-size: 17px;
-}
-
-.flow-step img {
-  border-radius: 12px;
-}
-
-/* ---------- SECTION 10: 施術者紹介 ---------- */
-#practitioner .lp-wrapper {
-  text-align: center;
-}
-
-.practitioner-photo {
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 18px;
-}
-
-.practitioner-name {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.practitioner-qual {
-  font-size: 13px;
-  color: var(--color-sub);
-  margin-bottom: 20px;
-}
-
-.practitioner-message {
-  font-family: var(--font-display);
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1.7;
-  color: var(--color-main-dark);
-  margin-bottom: 22px;
-}
-
-#practitioner .body-text {
-  text-align: left;
-}
-
-/* ---------- SECTION 11: 初回案内 ---------- */
-.price-box {
-  background: var(--color-bg-sub);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 20px;
-}
-
-.price-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  font-size: 15px;
-}
-
-.price-row-normal {
-  border-bottom: 1px dashed var(--color-border);
-  color: #6b6455;
-}
-
-.price-row-normal .price-value {
-  text-decoration: line-through;
-}
-
-.price-row-first {
-  font-weight: 700;
-  font-size: 17px;
-}
-
-.price-value-first {
-  color: var(--color-cta);
-  font-size: 24px;
-  font-family: var(--font-display);
-}
-
-.price-includes {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 28px;
-}
-
-.price-includes li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 14.5px;
-}
-
-.price-includes li span {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--color-main);
-  color: #fff;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-/* ---------- SECTION 12 / 15: CTAセクション ---------- */
-.section-cta {
-  background: var(--color-main);
-  color: #fff;
-  text-align: center;
-}
-
-.cta-mid-copy {
-  font-family: var(--font-display);
-  font-size: 24px;
-  font-weight: 700;
-  margin-bottom: 14px;
-}
-
-.cta-mid-sub {
-  font-size: 15px;
-  line-height: 1.9;
-  margin-bottom: 26px;
-  opacity: 0.92;
-}
-
-.section-cta .cta-button {
-  background: #fff;
-  color: var(--color-main-dark);
-}
-
-.section-cta .cta-button:hover {
-  background: var(--color-bg-sub);
-}
-
-/* ---------- SECTION 13: FAQ ---------- */
-.faq-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 28px;
-}
-
-.faq-item {
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-.faq-item h3 {
-  font-family: var(--font-body);
-  font-size: 15px;
-}
-
-.faq-question {
-  width: 100%;
-  min-height: var(--tap-min);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px 18px;
-  text-align: left;
-  font-weight: 500;
-  font-size: 15px;
-}
-
-.faq-icon {
-  position: relative;
-  width: 18px;
-  height: 18px;
-  flex-shrink: 0;
-}
-
-.faq-icon::before,
-.faq-icon::after {
-  content: "";
-  position: absolute;
-  background: var(--color-main);
-  border-radius: 2px;
-  transition: transform 0.25s ease;
-}
-
-.faq-icon::before {
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  transform: translateY(-50%);
-}
-
-.faq-icon::after {
-  top: 0;
-  left: 50%;
-  width: 2px;
-  height: 100%;
-  transform: translateX(-50%);
-}
-
-.faq-question[aria-expanded="true"] .faq-icon::after {
-  transform: translateX(-50%) rotate(90deg);
-  opacity: 0;
-}
-
-.faq-answer {
-  padding: 0 18px 16px;
-  font-size: 14px;
-  color: #4a4535;
-  animation: faq-open 0.25s ease;
-}
-
-@keyframes faq-open {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ---------- SECTION 16: 店舗情報 ---------- */
-.shop-photos {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-
-.shop-photos img {
-  border-radius: 12px;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-}
-
-.shop-info {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-}
-
-.shop-info > div {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  border-bottom: 1px dashed var(--color-border);
-  padding-bottom: 10px;
-  font-size: 14px;
-}
-
-.shop-info dt {
-  color: #6b6455;
-  flex-shrink: 0;
-}
-
-.shop-info dd {
-  margin: 0;
-  text-align: right;
-  font-weight: 500;
-}
-
-.shop-map {
-  margin-bottom: 24px;
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-
-.shop-map iframe {
-  display: block;
-}
-
-.shop-map-placeholder {
-  background: var(--color-bg-sub);
-  border: 1px dashed var(--color-border);
-  border-radius: var(--radius);
-  padding: 40px 16px;
-  text-align: center;
-  font-size: 13px;
-  color: #6b6455;
-}
-
-/* ---------- 固定CTA ---------- */
-.fixed-cta {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100;
-  padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
-  background: rgba(255, 253, 247, 0.96);
-  border-top: 1px solid var(--color-border);
-  box-shadow: 0 -6px 16px rgba(41, 38, 31, 0.08);
-  opacity: 0;
-  transform: translateY(100%);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;
-}
-
-.fixed-cta.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-.cta-button-fixed {
-  max-width: 480px;
-}
+:root{
+  --cream:#FFF8EE;
+  --peach:#FDEBDD;
+  --pink:#FCE7E2;
+  --blue:#E4EEF1;
+  --mint:#E3F1EA;
+  --paper:#FFFCF7;
+
+  --green:#4E8F6B;
+  --green-d:#2F6B4D;
+  --coral:#EC7A62;
+  --gold:#B88A3E;
+  --gold2:#DDBB72;
+  --brown:#6B4F2C;
+  --text:#4A4036;
+  --line1:#7ED957;
+  --line2:#3FA535;
+  --w:560px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#FBEBD8;color:var(--text);font-family:"Noto Sans JP",sans-serif;line-height:1.85;font-size:15px;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+ul,ol{list-style:none}
+em{font-style:normal}
+
+/* ---------- レイアウト ---------- */
+.page{display:flex;justify-content:center;align-items:flex-start}
+.side{display:none}
+.wrap{width:100%;max-width:var(--w);background:var(--paper);overflow:hidden;position:relative}
+.sec{position:relative;padding:56px 22px 52px}
+
+/* ---------- セクション背景（毎回変える＋区切りの形） ---------- */
+.s-worry{background:linear-gradient(180deg,#E7F0F3,#DCE8EC);padding-bottom:92px}
+.s-answer{background:linear-gradient(180deg,#FDEDE8,#FADCD4);padding-top:84px}
+.s-cause{background:var(--cream)}
+.s-approach{background:linear-gradient(180deg,#EAF5EE,#DDEFE4)}
+.s-safe{background:linear-gradient(135deg,#F6E8F5 0%,#E6F1FA 38%,#E6F6EC 70%,#FFF4DA 100%);padding-top:78px}
+.s-types{background:var(--peach)}
+.s-price{background:radial-gradient(120% 60% at 50% 0,#fff,transparent 70%),var(--cream)}
+.s-flow{background:linear-gradient(180deg,#E8F0F3,#F3F7F8)}
+.s-voice{background:var(--pink)}
+.s-book{background:var(--cream)}
+.s-faq{background:var(--mint)}
+.s-access{background:var(--peach);padding-bottom:48px}
+
+/* 下に丸みの区切り（次の色へ） */
+.s-answer::before,.s-cause::before,.s-approach::before,.s-types::before,.s-price::before,.s-flow::before,.s-voice::before,.s-book::before,.s-faq::before,.s-access::before{
+  content:"";position:absolute;left:-10%;right:-10%;top:-1px;height:34px;background:var(--prev);border-radius:0 0 50% 50%/0 0 100% 100%;z-index:1}
+.s-answer{--prev:#DCE8EC}.s-cause{--prev:#FADCD4}.s-approach{--prev:var(--cream)}.s-types{--prev:#DBF0E1}
+.s-price{--prev:var(--peach)}.s-flow{--prev:var(--cream)}.s-voice{--prev:#F3F7F8}.s-book{--prev:var(--pink)}
+.s-faq{--prev:var(--cream)}.s-access{--prev:var(--mint)}
+/* 安心：上がV字 */
+.vnotch::before{content:"";position:absolute;left:0;right:0;top:-1px;height:34px;background:#DDEFE4;clip-path:polygon(0 0,100% 0,100% 0,50% 100%,0 0)}
+
+/* 「そこで！」の丸 */
+.bubble{position:absolute;left:50%;bottom:0;transform:translate(-50%,50%);z-index:3;width:92px;height:92px;border-radius:50%;background:#fff;box-shadow:0 8px 20px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center;font-family:"Noto Serif JP",serif;font-weight:900;color:var(--brown);font-size:18px}
+.bubble::after{content:"";position:absolute;left:50%;bottom:-16px;transform:translateX(-50%);width:12px;height:22px;border-radius:0 0 8px 8px;background:#fff}
+
+/* ---------- 見出し ---------- */
+.eyebrow{font-size:11px;letter-spacing:.34em;color:var(--gold);text-align:center;font-weight:700}
+.h{font-family:"Noto Serif JP",serif;font-weight:900;color:var(--brown);text-align:center;font-size:23px;line-height:1.6;margin:4px 0 24px}
+.h.big{font-size:27px}
+.h .sm{display:block;font-size:13px;font-weight:700;color:var(--gold);margin-bottom:4px}
+.h em.c,em.c{color:var(--coral)}
+.h em.g,em.g{color:var(--green)}
+mark{background:linear-gradient(transparent 62%,#FFEE9A 62%) no-repeat 0 100%/0 100%;color:inherit;transition:background-size .9s .35s ease}
+.in mark,mark.in{background-size:100% 100%}
+.body{font-size:14.5px;margin-bottom:12px}
+.body.c{text-align:center}
+.note{font-size:11px;color:#8b7d6b;text-align:center;margin:8px 0}
+.c{text-align:center}
+
+/* ---------- CTA ---------- */
+.cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;max-width:400px;margin:22px auto 0;padding:16px 20px;border-radius:999px;background:linear-gradient(180deg,var(--line1),var(--line2));color:#fff;font-weight:900;font-size:17px;box-shadow:0 5px 0 #2f8228,0 12px 20px rgba(63,165,53,.26);position:relative;overflow:hidden}
+.cta i{font-style:normal;font-size:20px}
+.cta::after{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);transform:skewX(-20deg);animation:shine 3.4s ease-in-out infinite}
+@keyframes shine{0%,60%{left:-60%}100%{left:130%}}
+.cta:active{transform:translateY(3px);box-shadow:0 2px 0 #2f8228}
+.tap{display:block;text-align:center;font-size:12px;color:var(--gold);font-weight:700;margin-top:12px}
+
+/* ---------- オファーカード ---------- */
+.offer{background:#fff;border:3px solid var(--gold2);border-radius:22px;padding:26px 16px 22px;text-align:center;position:relative;margin-top:22px;box-shadow:0 10px 24px rgba(184,138,62,.14)}
+.offer-tag{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:var(--coral);color:#fff;font-weight:900;font-size:13px;padding:3px 18px;border-radius:999px;white-space:nowrap}
+.offer h3{font-family:"Noto Serif JP",serif;font-size:17px;color:var(--brown);margin-bottom:10px}
+.offer-list{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:14px}
+.offer-list span{font-size:12px;font-weight:700;color:var(--green-d);background:#E8F3EC;border-radius:999px;padding:3px 12px}
+.price{font-family:"Noto Serif JP",serif;font-weight:900;color:var(--coral);line-height:1;display:flex;align-items:baseline;justify-content:center;gap:4px}
+.price small{font-size:13px;font-weight:700;color:var(--brown)}
+.price b{font-size:60px;letter-spacing:.01em}
+.price i{font-style:normal;font-size:22px}
+.price-note{font-size:11.5px;margin-top:10px;color:#8b7d6b}
+
+/* ---------- FV ---------- */
+.fv{background:linear-gradient(180deg,#FFF3E2 0%,#FFF9F0 55%,var(--paper) 100%);padding-bottom:56px;position:relative}
+.fv-ribbon{background:linear-gradient(90deg,#3F7F5A,#5C9E78);color:#fff;text-align:center;font-weight:900;font-size:13px;letter-spacing:.1em;padding:8px 10px}
+.fv-hero{position:relative;margin:0 0 0}
+.fv-hero .hero,.fv-hero .ph{width:100%;aspect-ratio:4/4.1;object-fit:cover;border-radius:0 0 40px 40px}
+.badges{position:absolute;left:14px;bottom:22px;display:flex;gap:8px}
+.badge{background:rgba(255,252,246,.96);border:2px solid var(--gold2);border-radius:14px;padding:6px 14px;text-align:center;line-height:1.3;box-shadow:0 6px 14px rgba(0,0,0,.12)}
+.badge small{display:block;font-size:11px;font-weight:700;color:var(--brown)}
+.badge b{font-family:"Noto Serif JP",serif;font-size:26px;font-weight:900;color:var(--coral)}
+.badge b.sm{font-size:20px}
+.badge b i{font-style:normal;font-size:12px;color:var(--brown)}
+.fv-body{padding:26px 20px 0;text-align:center}
+.fv-eyebrow{font-size:13px;font-weight:900;color:var(--gold)}
+.fv-title{display:flex;flex-direction:column;gap:0;font-family:"Noto Serif JP",serif;font-weight:900;margin:2px 0 12px}
+.fv-title span{font-size:21px;color:var(--brown)}
+.fv-title b{font-size:56px;line-height:1.25;letter-spacing:.08em;background:linear-gradient(180deg,#5C9E78,#2F6B4D);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fv-lead{font-size:14px;margin-bottom:22px}
+.circles{display:flex;justify-content:center;gap:10px}
+.circles li{width:31%;max-width:150px;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fff,#F4E4C8);border:2px solid var(--gold2);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:12.5px;line-height:1.45;color:var(--brown);padding:6px;box-shadow:0 6px 14px rgba(184,138,62,.16)}
+.circles .ic{width:38%;margin-bottom:2px}
+
+/* ---------- 共感 ---------- */
+.check-card{background:#fff;border-radius:20px;padding:10px 20px;margin-bottom:22px;box-shadow:0 8px 20px rgba(60,100,120,.1)}
+.check-card li{display:block;position:relative;padding:12px 0 12px 36px;border-bottom:1px dashed #D9E3E7;font-weight:500;font-size:15px}
+.check-card li:last-child{border-bottom:0}
+.check-card li::before{content:"";position:absolute;left:0;top:50%;margin-top:-11px;width:22px;height:22px;border:2px solid #9DB4BC;border-radius:5px;background:#fff}
+.check-card li::after{content:"";position:absolute;left:7px;top:50%;margin-top:-9px;width:7px;height:13px;border:solid var(--green);border-width:0 3px 3px 0;transform:rotate(40deg) scale(0);transition:transform .4s cubic-bezier(.3,1.6,.5,1)}
+.in .check-card li::after,.check-card.in li::after{transform:rotate(40deg) scale(1)}
+.check-card li:nth-child(2)::after{transition-delay:.15s}.check-card li:nth-child(3)::after{transition-delay:.3s}.check-card li:nth-child(4)::after{transition-delay:.45s}.check-card li:nth-child(5)::after{transition-delay:.6s}
+.check-card b{color:var(--coral);font-weight:900}
+.talk{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.talk .girl{width:104px;flex:0 0 104px}
+.talk p{font-size:14px;line-height:1.9;background:#fff;border-radius:16px;padding:14px 16px;position:relative}
+.talk p::before{content:"";position:absolute;left:-8px;top:50%;margin-top:-8px;border:8px solid transparent;border-left:0;border-right-color:#fff}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:6px 0}
+.chips span{background:#A8BDC6;color:#fff;font-weight:700;font-size:13px;border-radius:8px;padding:3px 12px}
+.s-worry .body{text-align:center}
+
+/* ---------- 症例 ---------- */
+.case{border-radius:18px;overflow:hidden;border:3px solid #fff;box-shadow:0 10px 24px rgba(200,100,80,.16);margin-bottom:16px;background:#fff}
+.frame{border-radius:18px;overflow:hidden;margin:6px 0 14px;box-shadow:0 8px 20px rgba(107,79,44,.12);background:#fff}
+
+/* ---------- アプローチ ---------- */
+.mech{background:#fff;border-radius:20px;padding:14px;margin-bottom:26px;box-shadow:0 8px 20px rgba(60,120,90,.12)}
+.pt{background:#fff;border-radius:20px;padding:30px 16px 18px;margin:0 0 26px;position:relative;display:flex;gap:14px;align-items:center;box-shadow:0 8px 20px rgba(60,120,90,.12)}
+.pt.rev{flex-direction:row-reverse}
+.pt .no{position:absolute;top:-13px;left:16px;background:var(--green);color:#fff;font-weight:900;font-size:12px;letter-spacing:.1em;padding:3px 14px;border-radius:999px}
+.pt.rev .no{left:auto;right:16px}
+.pt-img{flex:0 0 42%;border-radius:14px;overflow:hidden}
+.pt-img img,.pt-img .ph{width:100%;aspect-ratio:1/1;object-fit:cover}
+.pt h3{font-family:"Noto Serif JP",serif;color:var(--brown);font-size:16px;line-height:1.5;margin-bottom:6px}
+.pt p{font-size:13px;line-height:1.8}
+
+/* ---------- 安心 ---------- */
+.safe{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:8px 0 22px}
+.safe li{aspect-ratio:1/1;border-radius:50%;background:rgba(255,255,255,.9);border:2px solid #A9D3BB;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:12.5px;line-height:1.5;color:var(--green-d);padding:4px;box-shadow:0 6px 14px rgba(60,140,100,.14)}
+.safe .ic{width:42%;margin-bottom:2px}
+
+/* ---------- タイプ ---------- */
+.types{display:grid;gap:14px;margin:8px 0 6px}
+.type{display:flex;gap:12px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 18px rgba(184,100,60,.12)}
+.type:nth-child(even){flex-direction:row-reverse}
+.type img,.type .ph{width:36%;flex:0 0 36%;object-fit:cover;min-height:120px}
+.type div{padding:12px 14px}
+.type b{display:block;font-family:"Noto Serif JP",serif;color:var(--brown);font-size:14px;line-height:1.45;margin-bottom:4px}
+.type b small{font-size:11px;color:var(--gold)}
+.type p{font-size:12.5px;line-height:1.7}
+.type .to{color:var(--green-d);font-weight:700;margin-top:3px}
+
+/* ---------- 価格 ---------- */
+.ticks{margin:8px 0 6px;display:grid;gap:10px}
+.ticks li{display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.ticks li::before{content:"✓";flex:0 0 22px;height:22px;border-radius:50%;background:var(--green);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:3px}
+.offer.big{margin-top:30px}
+.offer.big .price b{font-size:68px}
+
+/* ---------- 流れ ---------- */
+.flow{display:grid;gap:30px}
+.step{background:#fff;border-radius:20px;padding:16px;position:relative;box-shadow:0 8px 20px rgba(60,100,120,.1)}
+.step:not(:last-child)::after{content:"";position:absolute;left:50%;bottom:-24px;transform:translateX(-50%);border:12px solid transparent;border-top:14px solid var(--green)}
+.step .hd{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.step .no{background:var(--green);color:#fff;font-weight:900;font-size:10px;letter-spacing:.08em;border-radius:12px;padding:3px 10px 4px;line-height:1.1;text-align:center}
+.step .no b{display:block;font-family:"Noto Serif JP",serif;font-size:19px;letter-spacing:0}
+.step h3{font-family:"Noto Serif JP",serif;color:var(--brown);font-size:17px;line-height:1.4}
+.step p{font-size:13.5px;margin-bottom:10px}
+.step img,.step .ph{width:100%;border-radius:14px}
+
+/* ---------- 声 ---------- */
+.voices{display:grid;gap:12px}
+.voice{border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 8px 18px rgba(200,100,80,.14)}
+.voice .ph{margin:0}
+
+/* ---------- 限定 ---------- */
+.limited{background:#FFF3CC;border:2px dashed var(--gold);border-radius:20px;padding:22px 16px;text-align:center;margin-bottom:20px}
+.limited h3{font-family:"Noto Serif JP",serif;color:var(--coral);font-size:17px;margin-bottom:8px}
+.limited b{color:var(--coral);font-size:1.25em}
+.limited p{font-size:14px}
+
+/* ---------- FAQ ---------- */
+.qa{background:#fff;border-radius:16px;margin-bottom:10px;overflow:hidden;box-shadow:0 6px 14px rgba(60,140,100,.1)}
+.qa button{width:100%;display:flex;align-items:center;gap:10px;padding:16px;background:none;border:0;font:inherit;font-weight:700;text-align:left;color:var(--brown);cursor:pointer}
+.qa button::before{content:"Q";flex:0 0 26px;height:26px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
+.qa button::after{content:"+";margin-left:auto;font-size:22px;color:var(--green);transition:transform .25s}
+.qa.open button::after{transform:rotate(45deg)}
+.qa .a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.qa .a>p{overflow:hidden;padding:0 16px 0 52px;font-size:13.5px}
+.qa.open .a{grid-template-rows:1fr}
+.qa.open .a>p{padding-bottom:16px}
+
+/* ---------- 店舗 ---------- */
+.dl{background:#fff;border-radius:16px;padding:6px 16px;margin-top:6px}
+.dl div{display:flex;gap:14px;padding:10px 0;border-bottom:1px dashed #E5D5B8;font-size:13.5px}
+.dl div:last-child{border-bottom:0}
+.dl span:first-child{flex:0 0 72px;font-weight:700;color:var(--gold)}
+.map-wrap{margin:14px 0 0;border-radius:16px;overflow:hidden;background:#EFE5D0;box-shadow:0 8px 18px rgba(107,79,44,.12)}
+.map{display:block;width:100%;height:260px;border:0}
+.map-link{display:flex;align-items:center;justify-content:center;gap:6px;margin:12px auto 0;max-width:400px;padding:12px 18px;border-radius:999px;background:#fff;border:2px solid var(--gold2);color:var(--brown);font-weight:700;font-size:14px}
+.map-link i{font-style:normal;font-size:18px;color:var(--gold)}
+.staff{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.staff.one{grid-template-columns:1fr;max-width:260px;margin:0 auto}
+.staff .p{text-align:center}
+.staff img,.staff .ph{border-radius:16px;margin-bottom:6px;width:100%;aspect-ratio:1/1;object-fit:cover;object-position:top}
+.staff .role{display:block;color:var(--gold);font-weight:700;font-size:12px}
+.staff .nm{display:block;font-family:"Noto Serif JP",serif;font-weight:900;color:var(--brown);font-size:16px}
+footer{background:var(--brown);color:#EBDDC4;font-size:11px;text-align:center;padding:22px 16px 110px}
+
+/* ---------- 画像待ち枠 ---------- */
+.ph{background:repeating-linear-gradient(45deg,#f6efe1,#f6efe1 10px,#efe5d0 10px,#efe5d0 20px);border:2px dashed var(--gold2);min-height:120px;display:flex;align-items:center;justify-content:center;text-align:center;font-weight:700;color:var(--gold);font-size:13px;padding:10px}
+.ph small{display:block;font-weight:400;font-size:10.5px;margin-top:2px;word-break:break-all}
+
+/* ---------- 固定CTA（SP） ---------- */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;background:rgba(255,252,246,.96);border-top:1px solid #EBDDC4;padding:8px 14px calc(8px + env(safe-area-inset-bottom));text-align:center;transform:translateY(110%);transition:transform .35s}
+.sticky.show{transform:none}
+.sticky small{display:block;font-size:11px;font-weight:700;color:var(--brown)}
+.sticky .cta{margin-top:4px;padding:12px 20px;font-size:16px;max-width:460px}
 
 /* =========================================================
-   タブレット / PC（768px〜）
+   出現アニメーション（IntersectionObserverで .in を付与）
    ========================================================= */
-@media (min-width: 768px) {
-  :root {
-    --section-space: 96px;
-  }
-
-  .section-title {
-    font-size: 26px;
-  }
-
-  .section-title-lg {
-    font-size: 30px;
-  }
-
-  .hero-title {
-    font-size: 56px;
-  }
-
-  .worry-list {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .case-list {
-    flex-direction: row;
-  }
-
-  .case-card {
-    flex: 1;
-  }
-
-  .compare-list {
-    flex-direction: row;
-  }
-
-  .compare-card {
-    flex: 1;
-  }
-
-  .reason-list {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .shop-photos {
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
+.rv{opacity:0;transition:opacity .75s ease,transform .75s cubic-bezier(.2,.8,.2,1)}
+.rv[data-fx="up"]{transform:translateY(26px)}
+.rv[data-fx="zoom"]{transform:scale(.94)}
+.rv[data-fx="pop"]{transform:scale(.6)}
+.rv[data-fx="left"]{transform:translateX(-36px)}
+.rv[data-fx="right"]{transform:translateX(36px)}
+.rv.in{opacity:1;transform:none}
+.rv[data-fx="pop"].in{animation:pop .7s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes pop{0%{transform:scale(.6)}100%{transform:scale(1)}}
+.js-off .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none;animation:none!important}.cta::after{animation:none}html{scroll-behavior:auto}}
 
 /* =========================================================
-   PC（1024px〜）: LPの外側に薄い背景、中央にLP幅で表示
+   PC（左ロゴ／中央LP／右固定CTA）
    ========================================================= */
-@media (min-width: 1024px) {
-  body {
-    padding-top: 24px;
-  }
-
-  .fixed-cta {
-    max-width: var(--content-width);
-    margin: 0 auto;
-    left: 0;
-    right: 0;
-    border-radius: var(--radius) var(--radius) 0 0;
-  }
+@media (min-width:1000px){
+  body{background:linear-gradient(135deg,#FDEFDC,#F6E1C8)}
+  .side{display:flex;flex:1;position:sticky;top:0;height:100vh;align-items:center;justify-content:center;padding:20px}
+  .side.l{flex-direction:column;gap:10px;text-align:center}
+  .side .logo{font-family:"Noto Serif JP",serif;font-weight:900;color:var(--brown);font-size:36px;letter-spacing:.1em;line-height:1.3}
+  .side .logo small{display:block;font-size:12px;letter-spacing:.2em;color:var(--gold);font-weight:700}
+  .side .mark{width:74px;height:74px;border-radius:50%;border:3px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--gold);margin-bottom:6px}
+  .side.l p{font-size:13px;font-weight:700;color:var(--brown)}
+  .side.r{flex-direction:column;gap:10px}
+  .side.r small{font-size:12px;font-weight:700;color:var(--brown)}
+  .side.r .s2{font-weight:400}
+  .side.r .cta{max-width:290px;margin:0}
+  .wrap{border-radius:32px;box-shadow:0 0 50px rgba(107,79,44,.18);margin:0}
+  .sticky{display:none}
+  footer{padding-bottom:24px}
 }
